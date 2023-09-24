@@ -26,6 +26,7 @@ import android.content.Context;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.io.File;
+import android.net.Uri;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,10 +55,10 @@ public class DeleteFileDialog {
     dialog.create().show();
   }
 
-  public void delete() {
+  public void delete(final int position) {
     binding = LayoutDeletingFileBinding.inflate(activity.getLayoutInflater());
     MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(activity);
-    dialog.setTitle(R.string.deleting);
+    dialog.setTitle("Delete " + Uri.fromFile(new File(adapter.getItem(position))).getLastPathSegment() + "?");
     dialog.setMessage(R.string.please_wait);
     dialog.setView(binding.getRoot());
     alert = dialog.create();
